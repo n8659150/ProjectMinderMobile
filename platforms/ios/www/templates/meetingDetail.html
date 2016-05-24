@@ -1,0 +1,76 @@
+<ion-view title="Meeting Detail">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+		<ion-list>
+<!--             <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+            </div> -->
+                <ion-item class="item-divider">{{currentMeeting.unit}}</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Topic</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentMeeting.topic}}</p>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Unit</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentMeeting.unit}}</p>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Location</span>
+                    <p style="font-size:16px;">{{currentMeeting.location}}</p>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <p style="font-size:16px;">{{currentMeeting.supervisorFirstName}}</p>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label" style="color:#fff;">Supervisor</span>
+                    <p style="font-size:16px;">{{currentMeeting.supervisorLastName}}</p>
+                </label>
+
+                <div ng-repeat="participant in currentMeeting.participants">
+                    <ion-item class="item-divider">Participant {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <p style="font-size:16px; line-height:16px;">{{participant.p_name}}</p>
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <p style="font-size:16px; line-height:16px;">{{participant.p_num}}</p>
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <p style="font-size:16px; line-height:16px;">{{participant.p_email}}</p>
+                    </label>
+
+                </div>
+
+                <ion-item class="item-divider">More Information</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentMeeting.startDate.toString()}}</p>
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentMeeting.startTime}}</p>
+                </label>
+                
+                <label class="item item-input">
+                    <span class="input-label">Status</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentMeeting.status}}</p>
+                </label>
+
+                <br />
+                <!-- <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="Student">
+                </label> -->
+            </ion-list>
+            <a ng-href="#/success/meeting/{{currentMeeting.$id}}/{{participantId}}"><button class="button button-stable  button-block" ng-click="avaCheck(currentMeeting.participants[0],locationItems)">Availability Check</button></a>
+    </ion-content>
+</ion-view>

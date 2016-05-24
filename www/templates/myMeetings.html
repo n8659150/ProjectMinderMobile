@@ -1,0 +1,107 @@
+
+
+
+<!-- user role == admin -->
+<ion-view title="My meetings">
+
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="query2">
+            </label>
+        </form>
+
+
+        <ion-list ng-if="currentUser.role == 'admin'" >
+            <ion-item class="item-divider">All meetings</ion-item>
+<!--        <ion-item 
+            ng-repeat="meeting in filteredMeetings = (meetingItems | filter:{supervisorFirstName:user.firstname,supervisorLastName:user.lastname})"
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            > -->
+            <ion-item 
+            ng-repeat="meeting in meetingItems | filter:query2"
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            >
+            {{meeting.startDate}} {{meeting.startTime}} {{meeting.supervisorFirstName}} {{meeting.supervisorLastName}} with {{meeting.participants[0].p_name}}
+            <ion-option-button class="button-balanced" ng-click="goToMeetingEditPage(meeting.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedMeetingItem(meeting.$id); deleteMeetingItem(currentMeetingItem)">Delete</ion-option-button>
+            </ion-item>
+            
+        </ion-list>
+
+       <!--  <ion-list ng-if="currentUser.role == 'admin'" ng-repeat="meeting in meetingItems | filter:query2">
+            <ion-item class="item-divider" ng-show="$first">{{meeting.supervisorFirstName}}'s meetings</ion-item>
+
+            <ion-item 
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            >
+            <div>
+            {{meeting.startDate}} {{meeting.startTime}} in {{meeting.location}} with {{meeting.participants[0].p_name}}
+            <ion-option-button class="button-balanced" ng-click="goToMeetingEditPage(meeting.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedMeetingItem(meeting.$id); deleteMeetingItem(currentMeetingItem)">Delete</ion-option-button>
+            </div>
+
+            </ion-item>
+        
+        </ion-list> -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <ion-list ng-if="currentUser.role != 'admin'">
+            <ion-item class="item-divider">Schedule</ion-item>
+
+            <!-- login as admin -->
+            <!-- <ion-item 
+            ng-repeat="meeting in meetingItems | filter:query2"
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            ng-if="currentUser.role == 'admin'"
+            > -->
+
+           <!--  {{meeting.startDate}} {{meeting.startTime}} in {{meeting.location}} with {{meeting.participants[0].p_name}}
+            <ion-option-button class="button-balanced" ng-click="goToMeetingEditPage(meeting.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedMeetingItem(meeting.$id); deleteMeetingItem(currentMeetingItem)">Delete</ion-option-button>
+            </ion-item> -->
+            <!-- END login as admin -->
+
+            <!-- login as supervisor  -->
+            <ion-item 
+            ng-repeat="meeting in meetingItems | filter:{supervisorFirstName:currentUser.firstname,supervisorLastName:currentUser.lastname} | filter:query2"
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            ng-if="currentUser.role == 'supervisor'" 
+            >
+            <!-- {{meeting.startDate.slice(4,15)}} {{meeting.startTime}} {{meeting.participants[0].name}} -->
+            {{meeting.startDate}} {{meeting.startTime}} in {{meeting.location}} with {{meeting.participants[0].p_name}}
+            <ion-option-button class="button-balanced" ng-click="goToMeetingEditPage(meeting.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedMeetingItem(meeting.$id); deleteMeetingItem(currentMeetingItem)">Delete</ion-option-button>
+            </ion-item>
+            <!-- END login as supervisor -->
+
+
+            <!-- login as student -->
+            <ion-item 
+            ng-repeat="meeting in meetingItems | filter:{participants: {p_email:currentUser.email}} | filter:query2"
+            ng-href="#/success/meeting/{{meeting.$id}}"
+            ng-if="currentUser.role == 'student'"
+            >
+            <!-- {{meeting.startDate.slice(4,15)}} {{meeting.startTime}} {{meeting.participants[0].name}} -->
+            {{meeting.startDate}} {{meeting.startTime}} in {{meeting.location}} with {{meeting.supervisorFirstName}}
+            <ion-option-button class="button-balanced" ng-click="goToMeetingEditPage(meeting.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedMeetingItem(meeting.$id); deleteMeetingItem(currentMeetingItem)">Delete</ion-option-button>
+            </ion-item>
+            <!-- END login as student -->
+            
+        </ion-list>
+        <a ui-sref="projectMinder.addMeeting" id="myProjects-button9" class="button button-positive  button-block">Add New</a>
+        <form class="list"></form>
+    </ion-content>
+</ion-view>

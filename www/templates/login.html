@@ -1,0 +1,26 @@
+<ion-view title="Login">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
+        <form class="list" name="loginForm" 
+        ng-submit="login(user)"
+        novalidate>
+            <ion-list>
+            <div>
+                <p style="color:blue; text-align:center;" 
+                    ng-show="message"> {{ message }}</p>
+            </div>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="email" placeholder="Email" name="email" 
+                    ng-model="user.email" ng-required="true">
+                </label>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="password" placeholder="Password" name="password"  ng-model="user.password" ng-required="true">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <!-- <a ui-sref="projectMinder.myProjects" id="login-button1" class="button button-stable  button-block">Log in</a> -->
+            <button type="submit" class="button button-positive  button-block"
+            ng-disabled="loginForm.$invalid">Log in</button>
+            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+        </form>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,180 @@
+<ion-view title="Add Meeting">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list" name="createMeetingForm" ng-submit="addMeeting(newMeeting,newParticipants)"
+        novalidate>
+
+        <!-- <form class="list">
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Project Name</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="">
+                </label>
+            </ion-list>
+            <button id="addMeeting-button11" class="button button-stable  button-block">Create</button>
+        </form> -->
+
+        <!-- 
+          topic: newMeeting.topic,
+          unit: newMeeting.unit,
+          location: newMeeting.location,
+          participants: participantArray,
+          startDate: newProject.startDate.toString(),
+          startTime: newProject.startTime,
+          status: newMeeting.status 
+        -->
+
+        <ion-list>
+            <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+            </div>
+            <ion-item class="item-divider">New Meeting</ion-item>
+<!--             <label class="item item-input">
+                    <span class="input-label">Topic</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.topic" placeholder="e.g. Project Minder">
+            </label> -->
+            
+            <label class="item item-input">
+                    <span class="input-label">Topic</span>
+                    <!-- when role == student -->
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newMeeting" 
+                            ng-options="projectItem as projectItem.name for projectItem in projectItems | filter:{students: {email:currentUser.email}}"
+                            ng-change="update(newMeeting)"
+                            ng-if="currentUser.role =='student'">
+                            <option value="">-- choose a topic --</option>
+                    </select>
+                    <!-- END when role == student -->
+                    <!-- when role == supervisor -->
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newMeeting.topic" 
+                            ng-options="projectItem.name as projectItem.name for projectItem in projectItems | filter:{supervisorFirstName:currentUser.firstname,supervisorLastName:currentUser.lastname}"
+                            ng-if="currentUser.role =='supervisor'">
+                            <option value="">-- choose a topic --</option>
+                    </select>
+                    <!-- END when role == supervisor -->
+            </label>
+            
+
+           <label class="item item-input">
+                    <span class="input-label">Unit</span>
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newMeeting.unit" 
+                            ng-options="projectItem.unit as projectItem.unit for projectItem in projectItems | filter:{name: newMeeting.topic}"
+                            >
+                            <option value="">-- choose a unit --</option>
+                    </select>
+            </label>
+
+            <label class="item item-input">
+                    <span class="input-label">Location</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.location" placeholder="e.g. S1009">
+            </label>
+
+
+            
+            <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <!-- when admin -->
+                    <input ng-if="currentUser.role == 'admin'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.supervisorFirstName" placeholder="e.g. PetersonAdmin">
+                    <!-- when supervisor -->
+                    <input ng-if="currentUser.role == 'supervisor'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.supervisorFirstName" ng-init="newMeeting.supervisorFirstName = currentUser.firstname" placeholder="e.g. Peterson">
+                    <!-- when student -->
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newMeeting.supervisorFirstName" 
+                            ng-options="projectItem.supervisorFirstName as projectItem.supervisorFirstName for projectItem in projectItems | filter:{name: newMeeting.topic}"
+                            ng-if="currentUser.role == 'student'"
+                            >
+                            <option value="">-- choose a supervisor --</option>
+                    </select>
+            </label>
+
+            <label class="item item-input" >
+                    <span class="input-label"></span>
+                    <!-- when admin -->
+                    <input ng-if="currentUser.role == 'admin'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.supervisorLastName" placeholder="e.g. JoshAdmin">
+                    <!-- when supervisor -->
+                    <input ng-if="currentUser.role == 'supervisor'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.supervisorLastName" ng-init="newMeeting.supervisorLastName = currentUser.lastname" placeholder="e.g. Josh">
+                    <!-- when student -->
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newMeeting.supervisorLastName" 
+                            ng-options="projectItem.supervisorLastName as projectItem.supervisorLastName for projectItem in projectItems | filter:{name: newMeeting.topic}"
+                            ng-if="currentUser.role == 'student'"
+                            >
+                            <option value="">-- supervisor lastname--</option>
+                    </select>
+
+            </label>
+            
+
+            <div ng-repeat="newParticipant in newParticipants">
+                    <ion-item class="item-divider">Participant {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <!-- when admin -->
+                    <input ng-if="currentUser.role == 'admin'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newParticipant.p_name" placeholder="Participant {{$index+1}} name">
+                    <!-- when supervisor -->
+                    <select ng-required="true"
+                            style="font-size:16px; line-height:16px;"
+                            ng-model="newParticipant.p_name" 
+                            ng-options="projectItem.student.name as projectItem.students[0].name for projectItem in projectItems | filter:{name: newMeeting.topic}"
+                            ng-if="currentUser.role == 'supervisor'"
+                            >
+                            <option value="">-- choose a participant --</option>
+                    </select>
+                    <!-- when student -->
+                    <input ng-if="currentUser.role == 'student'" style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newParticipant.p_name" placeholder="Participant {{$index+1}} name" ng-init="newParticipant.p_name = combinedName">
+                    </label>
+
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <!-- when admin -->
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newParticipant.p_num" placeholder="Participant {{$index+1}} number">
+                    </label>
+
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newParticipant.p_email" placeholder="Participant {{$index+1}} email">
+                    </label>
+            </div>
+
+             <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.startDate" placeholder="Start Date">
+             </label>
+
+             <label class="item item-input">
+                    <span class="input-label">Start Time</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newMeeting.startTime" placeholder="Start Time">
+            </label>
+
+            <label class="item item-input item-select">
+                    <span class="input-label">Status</span>
+                    <select style="font-size:16px;line-height:16px;" class="form-control"
+                            ng-model="newMeeting.status"
+                            ng-required="true"
+                                     >
+                        <option>Comfirmed</option>
+                        <option>Unconfirm</option>
+                    </select>
+            </label>
+
+        </ion-list>
+        <button id="addMeeting-button11" class="button button-stable  button-block">Create</button>
+        </form> 
+    </ion-content>
+</ion-view>

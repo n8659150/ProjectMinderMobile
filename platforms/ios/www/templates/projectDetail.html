@@ -1,0 +1,68 @@
+<ion-view title="Project Detail">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+		<ion-list>
+<!--             <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+            </div> -->
+                <ion-item class="item-divider">{{currentProject.unit}} {{currentProject.name}}</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Project Name</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.name}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Unit Code</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.unit}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <p style="font-size:16px;">{{currentProject.supervisorFirstName}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label" style="color:#fff;">Supervisor</span>
+                    <p style="font-size:16px;">{{currentProject.supervisorLastName}}</p>
+                </label>
+
+                <div ng-repeat="student in currentProject.students">
+                    <ion-item class="item-divider">Student {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <p style="font-size:16px; line-height:16px;">{{student.name}}</p>
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <p style="font-size:16px; line-height:16px;">{{student.num}}</p>
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <p style="font-size:16px; line-height:16px;">{{student.email}}</p>
+                    </label>
+                </div>
+
+                <ion-item class="item-divider">More Information</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.startDate.slice(4,15)}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Date</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.endDate.slice(4,15)}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Status</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.status}}</p>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Description</span>
+                    <p style="font-size:16px; line-height:16px;">{{currentProject.description}}</p>
+                </label>
+                <br />
+                <!-- <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="Student">
+                </label> -->
+            </ion-list>
+       
+    </ion-content>
+</ion-view>

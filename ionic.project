@@ -1,0 +1,12 @@
+{
+  "name": "pmapp",
+  "app_id": "83ef434c",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

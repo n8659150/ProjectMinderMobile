@@ -1,0 +1,58 @@
+<ion-view title="My Projects">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="Search" ng-model="query">
+            </label>
+        </form>
+        <ion-list>
+            <ion-item class="item-divider">Project Name</ion-item>
+            <!-- when login as admin -->
+            <ion-item 
+            ng-repeat="project in projectItems | filter:query"
+            ng-href="#/success/detail/{{project.$id}}"
+            ng-if="currentUser.role == 'admin'"
+            >
+            {{project.unit}} {{project.name}}
+            <ion-option-button class="button-balanced" ng-click="goToEditPage(project.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedProjectItem(project.$id); deleteItem(currentProjectItem)">Delete</ion-option-button>
+            </ion-item>
+            <!-- END when login as admin -->
+
+            <!-- login as student -->
+            <ion-item 
+            
+            ng-repeat="project in projectItems | filter:{students: {email:currentUser.email}} | filter:query"
+            ng-href="#/success/detail/{{project.$id}}"
+            ng-if="currentUser.role == 'student'"
+            >
+            {{project.unit}} {{project.name}}
+            </ion-item>
+            <!-- END login as student -->
+
+            <ion-item 
+            ng-repeat="project in projectItems | filter:{supervisorFirstName:currentUser.firstname,supervisorLastName:currentUser.lastname} | filter:query"
+            ng-href="#/success/detail/{{project.$id}}"
+            ng-if="currentUser.role == 'supervisor'"
+            >
+            {{project.unit}} {{project.name}}
+            <ion-option-button class="button-balanced" ng-click="goToEditPage(project.$id)">Edit</ion-option-button>
+            <ion-option-button class="button-assertive" ng-click="setSelectedProjectItem(project.$id); deleteItem(currentProjectItem)">Delete</ion-option-button>
+            </ion-item>
+            
+            <!-- <ion-item ui-sref="projectMinder.projectDetail">
+            IFN702 Project Minder Mobile
+            <ion-option-button class="button-balanced">Edit</ion-option-button>
+            <ion-option-button class="button-assertive">Delete</ion-option-button>
+            </ion-item>
+            <ion-item ui-sref="projectMinder.projectDetail">
+            IFN665 Apple Watch Tracker app
+            <ion-option-button class="button-balanced">Edit</ion-option-button>
+            <ion-option-button class="button-assertive">Delete</ion-option-button>
+            </ion-item> -->
+        </ion-list>
+        <a ui-sref="projectMinder.addProject" id="myProjects-button9" class="button button-positive  button-block" ng-show="currentUser.role != 'student'" ng-hide="currentUser.role == 'student'">Add New</a>
+        <form class="list"></form>
+    </ion-content>
+</ion-view>

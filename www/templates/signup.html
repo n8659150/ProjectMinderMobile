@@ -1,0 +1,54 @@
+<ion-view title="Signup">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
+        <form class="list" name="signupForm" 
+        ng-submit="register(user)"
+        novalidate>
+            <ion-list>
+            <div>
+                <p style="color:blue; text-align:center;" 
+                    ng-show="message"> {{ message }}</p>
+            </div>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="text" placeholder="Firstname" name="firstname" ng-model="user.firstname" ng-required="true">
+                </label>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="text" placeholder="Lastname" name="lastname" ng-model="user.lastname" ng-required="true">
+                </label>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="email" placeholder="Email" name="email" 
+                    ng-model="user.email" ng-required="true">
+                </label>
+                <label class="item item-input">
+                    <input style="font-size:16px; line-height:16px;" type="password" placeholder="Password" name="password"  ng-model="user.password" ng-required="true">
+                </label>
+
+            </ion-list>
+            <label>
+                <ion-radio style="font-size:16px; line-height:16px;" ng-model="user.role" 
+                ng-value="'admin'">Admin</ion-radio>
+                </label>
+                <label>
+                <ion-radio style="font-size:16px; line-height:16px;" ng-model="user.role" 
+                ng-value="'supervisor'">Supervisor</ion-radio>
+                </label>
+                <label>
+                <ion-radio style="font-size:16px; line-height:16px;" ng-model="user.role" 
+                ng-value="'student'">Student</ion-radio>
+                </label>
+
+                <label class="item item-input" style="display:none;">
+                    <input ng-model="user.available" ng-value="true" type="radio" ng-init="user.available = true"> 
+                </label>
+                <label class="item item-input" style="display:none;">
+                    <input ng-model="user.lat" ng-value="true" type="text" ng-init="user.lat = 0.0"> 
+                </label>
+                <label class="item item-input" style="display:none;">
+                    <input ng-model="user.long" ng-value="true" type="text" ng-init="user.long = 0.0"> 
+                </label>
+             <div class="spacer" style="height: 40px;"></div>
+            <!-- <a ui-sref="projectMinder.myProjects" id="login-button1" class="button button-stable  button-block">Log in</a> -->
+            <button type="submit" class="button button-positive  button-block"
+            ng-disabled="signupForm.$invalid">sign up</button>
+        </form>
+    </ion-content>
+</ion-view>

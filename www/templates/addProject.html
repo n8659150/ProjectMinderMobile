@@ -1,0 +1,89 @@
+<ion-view title="Add Project">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list" name="createForm" ng-submit="addProject(newProject,newStudents)"
+        novalidate>
+            <ion-list>
+                <!-- <label class="item item-input">
+                    <span class="input-label">Project Name</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <input type="text" placeholder="">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="">
+                </label> -->
+
+<!--                 <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+                </div> -->
+                <ion-item class="item-divider">New Project</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Project Name</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newProject.name" placeholder="Project Name">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Unit Code</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newProject.unit" placeholder="Unit Code">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newProject.supervisorFirstName" placeholder="Supervisor FirstName" ng-init="roleCheck(currentUser.role)">
+                </label>
+                
+                <label class="item item-input">
+                    <span class="input-label" style="color:#fff;">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newProject.supervisorLastName" placeholder="Supervisor LastName" ng-init="roleCheck(currentUser.role)">
+                </label>
+
+
+                <div ng-repeat="newStudent in newStudents">
+                    <ion-item class="item-divider">Student {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newStudent.name" placeholder="Student {{$index+1}} name">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newStudent.num" placeholder="Student {{$index+1}} number">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newStudent.email" placeholder="Student {{$index+1}} email">
+                    </label>
+                    
+                </div>
+                <ion-item class="item-divider">More Information</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="date" ng-model="newProject.startDate" placeholder="Start Date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="date" ng-model="newProject.endDate" placeholder="End Date">
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Status</span>
+                    <select style="font-size:16px;line-height:16px;" class="form-control"
+                            ng-model="newProject.status"
+                            ng-required="true"
+                                     >
+                        <option>Available</option>
+                        <option>Unavailable</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Description</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="newProject.description" placeholder="Description">
+                </label>
+
+            </ion-list>
+            <button id="addProject-button10" type="submit" ng-disabled="createForm.$invalid" class="button button-positive  button-block">Create</button>
+        </form>
+    </ion-content>
+</ion-view>

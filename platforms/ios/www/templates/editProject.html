@@ -1,0 +1,76 @@
+<ion-view title="Edit Project">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+
+        <form class="list" name="editForm" ng-submit="saveItem(currentProject)"
+        novalidate>
+            <ion-list>
+<!--             <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+            </div> -->
+                <ion-item class="item-divider">{{currentProject.unit}} {{currentProject.name}}</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Project Name</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentProject.name" placeholder="Project Name">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Unit Code</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentProject.unit" placeholder="Unit Code">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentProject.supervisorFirstName" placeholder="Supervisor FirstName">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label" style="color:#fff;">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentProject.supervisorLastName" placeholder="Supervisor LastName">
+                </label>
+                <div ng-repeat="student in currentProject.students">
+                    <ion-item class="item-divider">Student {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="student.name" placeholder="Student {{$index+1}} name">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="student.num" placeholder="Student {{$index+1}} number">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="student.email" placeholder="Student {{$index+1}} email">
+                    </label>
+                    
+                </div>
+                <ion-item class="item-divider">More Information</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="date" ng-model="currentProject.startDate" placeholder="Start Date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">End Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="date" ng-model="currentProject.endDate" placeholder="End Date">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Status</span>
+                    <select class="form-control"
+                            ng-model="currentProject.status"
+                            ng-required="true"
+                                     >
+                        <option>Available</option>
+                        <option>Unavailable</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Description</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentProject.description" placeholder="Description">
+                </label>
+                <!-- <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="Student">
+                </label> -->
+            </ion-list>
+            <button id="editProject-button11" type="submit" ng-disabled="editForm.$invalid" class="button button-positive  button-block">Save</button>
+        </form>
+    </ion-content>
+</ion-view>

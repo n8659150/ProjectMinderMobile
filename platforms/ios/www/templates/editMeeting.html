@@ -1,0 +1,83 @@
+<ion-view title="Edit Meeting">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+
+        <form class="list" name="editForm" ng-submit="saveItem(currentMeeting)"
+        novalidate>
+            <ion-list>
+<!--             <div>
+                <p style="text-align:center; color:blue;" 
+                    ng-show="alerts.msg"> {{ alerts.msg }}</p>
+            </div> -->
+                <ion-item class="item-divider">{{currentMeeting.unit}} {{currentMeeting.topic}}</ion-item>
+                <label class="item item-input">
+                    <span class="input-label">Topic</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.topic" placeholder="Meeting Topic">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Unit</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.unit" placeholder="Unit">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Location</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.location" placeholder="Location">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.supervisorFirstName" placeholder="Supervisor FirstName">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label" style="color:#fff;">Supervisor</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.supervisorLastName" placeholder="Supervisor LastName">
+                </label>
+                <div ng-repeat="participant in currentMeeting.participants">
+                    <ion-item class="item-divider">Participant {{$index+1}}</ion-item>
+
+                    <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="participant.p_name" placeholder="Participant {{$index+1}} name">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">StuNo</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="participant.p_num" placeholder="Participant {{$index+1}} number">
+                    </label>
+                    <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="participant.p_email" placeholder="Participant {{$index+1}} email">
+                    </label>
+                    
+                </div>
+                <ion-item class="item-divider">More Information</ion-item>
+
+                <label class="item item-input">
+                    <span class="input-label">Start Date</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.startDate" placeholder="e.g. 20160420">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Start Time</span>
+                    <input style="font-size:16px; line-height:16px;" ng-required="true" type="text" ng-model="currentMeeting.startTime" placeholder="e.g. 10:30">
+                </label>
+
+                <label class="item item-input">
+                    <span class="input-label">Status</span>
+                    <select class="form-control"
+                            ng-model="currentMeeting.status"
+                            ng-required="true"
+                                     >
+                        <option>Comfirmed</option>
+                        <option>Unconfirm</option>
+                    </select>
+                </label>
+               
+                <!-- <label class="item item-input">
+                    <span class="input-label">Student</span>
+                    <input type="text" placeholder="Student">
+                </label> -->
+            </ion-list>
+            <button id="editMeeting-button11" type="submit" ng-disabled="editForm.$invalid" class="button button-positive button-block">Save</button>
+        </form>
+    </ion-content>
+</ion-view>
