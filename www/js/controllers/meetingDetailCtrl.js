@@ -17,8 +17,8 @@ myApp
 
 	console.log($scope.currentMeeting);
 	// console.log($scope.currentStudents);
-	$scope.lat = -27.450850799999998; // QUT GP S block lat & long
-  $scope.long = 153.015187;
+	$scope.lat = -27.477330; // QUT GP Library lat & long
+  $scope.long = 153.028478;
   $scope.lat2 = -27.45085079999999;
   $scope.long2 = 153.01;
 

@@ -47,7 +47,7 @@ myApp.factory('GeoAlert', function() {
        callback2 = cb2;
        var dist = getDistanceFromLatLonInKm(lat, long, GPlt, GPlg);
         console.log("dist in km is "+dist);
-        if(dist <= minDistance) {callback()} else {callback2()};
+        if(dist <= minDistance) {callback(dist)} else {callback2(dist)};
 
        // interval = window.setInterval(hb, duration);
      }, 
